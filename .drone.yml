@@ -1,0 +1,24 @@
+---
+kind: pipeline
+type: docker
+name: behat-mink-test
+
+platform:
+  os: linux
+  arch: amd64
+
+workspace:
+  base: /drone
+  path: src
+
+steps:
+  - name: webUI-test
+    pull: always
+    image: owncloudci/php:7.4
+    commands:
+      - bash run.sh
+
+services:
+  - name: selenium
+    pull: always
+    image: selenium/standalone-chrome-debug:latest
